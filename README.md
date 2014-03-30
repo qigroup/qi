@@ -1,4 +1,4 @@
 qi
 ==
 
-A simple non-X game.
+A chess game.

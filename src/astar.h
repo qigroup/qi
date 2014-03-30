@@ -24,21 +24,28 @@ struct point
   int y;
 };
 
-struct open_node                /* the point to compare and explore next time */
+struct open_node
+/* the point to compare and explore next time */
 {
-  struct point x;
-  long f;
-  struct close_node *previous;   /* from which point */
-  struct open_node 
+  struct point p;
+  long distance;
+  /* the distance from point start to current point */
+  long estimate;
+  /* the estimated distance from point start to point end via current point */
+  struct close_node *previous;
+  /* from which point */
+  struct open_node
     *f_nbigger,
     *f_bigger,
     *name_nbigger,
-    *name_bigger;                /* nbigger = not bigger */
+    *name_bigger;
+  /* nbigger = not bigger */
 };
 
 struct close_node
+/* the point that have been explored */
 {
-  struct point x;
+  struct point p;
   struct close_node
     *f_nbigger,
     *f_bigger,
@@ -48,3 +55,13 @@ struct close_node
 
 #define OPEN_BUFFER_SIZE (64 * sizeof (struct open_node))
 #define CLOSE_BUFFER_SIZE (64 * sizeof (struct close_node))
+
+
+const struct point increment [4] =
+  /* get each point around */
+  {
+    {1,0},
+    {0,1},
+    {-1,0},
+    {0,-1}
+  };
