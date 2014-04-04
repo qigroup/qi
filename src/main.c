@@ -18,11 +18,11 @@
 */
 #include "main.h"
 
-//static char *read_arguments (int argc, char argv[]);
-char *arg;
-
 main (int argc, char *argv[])
 {
+  printf ("Qi %s %s", VERSION, TYPE);
+  /* echo the version of Qi */
+
   GtkWidget *window, *hello;
   
   gtk_init (&argc, &argv);

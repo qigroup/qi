@@ -30,15 +30,17 @@ struct open_node
   struct point p;
   long distance;
   /* the distance from point start to current point */
-  long estimate;
-  /* the estimated distance from point start to point end via current point */
+  long estimated_cost;
+  /* the estimated cost from point start to point end via current point */
   struct close_node *previous;
   /* from which point */
   struct open_node
-    *f_nbigger,
-    *f_bigger,
+    *cost_nbigger,
+    *cost_bigger,
+  /* tree of cost */
     *name_nbigger,
     *name_bigger;
+  /* tree of name */
   /* nbigger = not bigger */
 };
 
@@ -47,10 +49,11 @@ struct close_node
 {
   struct point p;
   struct close_node
-    *f_nbigger,
-    *f_bigger,
+    *cost_nbigger,
+    *cost_bigger,
     *name_nbigger,
     *name_bigger;
+  /* the same as open_node */
 };
 
 #define OPEN_BUFFER_SIZE (64 * sizeof (struct open_node))
@@ -58,7 +61,7 @@ struct close_node
 
 
 const struct point increment [4] =
-  /* get each point around */
+  /* define point_around */
   {
     {1,0},
     {0,1},
